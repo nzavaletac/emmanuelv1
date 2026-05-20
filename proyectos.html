@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <link rel="stylesheet" href="css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="css/owl.carousel.min.css"/>
+  <link rel="stylesheet" href="css/owl.theme.default.min.css"/>
+  <link href="https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/style.css"/>
+  <title>Todos los Proyectos | Constructora Emmanuel</title>
+  <link rel="icon" href="./img/icon.ico"/>
+</head>
+<body>
+
+<!-- TOP NAV -->
+<div class="top-nav">
+  <div class="container">
+    <div class="row justify-content-between align-items-center">
+      <div class="col-auto d-flex flex-wrap gap-2">
+        <a href="mailto:info@constructoraemmanuel.pe" class="top-link"><i class="bx bxs-envelope"></i> info@constructoraemmanuel.pe</a>
+        <a href="tel:+51919441396" class="top-link"><i class="bx bxs-phone-call"></i> (+51) 919 441 396</a>
+      </div>
+      <div class="col-auto social-icons">
+        <a href="#"><i class="bx bxl-facebook"></i></a>
+        <a href="#"><i class="bx bxl-instagram"></i></a>
+        <a href="#"><i class="bx bxl-whatsapp"></i></a>
+        <a href="#"><i class="bx bxl-linkedin"></i></a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top">
+  <div class="container">
+    <a class="navbar-brand" href="index.html"><img src="./img/logo.png" class="logo img-fluid" alt="Constructora Emmanuel"/></a>
+    <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-expanded="false">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto align-items-lg-center">
+        <li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
+        <li class="nav-item"><a class="nav-link" href="index.html#about">Nosotros</a></li>
+        <li class="nav-item"><a class="nav-link" href="index.html#services">Servicios</a></li>
+        <li class="nav-item"><a class="nav-link active" href="proyectos.html">Proyectos</a></li>
+        <li class="nav-item"><a class="nav-link" href="index.html#team">Equipo</a></li>
+        <li class="nav-item"><a class="nav-link" href="index.html#contact">Contacto</a></li>
+        <li class="nav-item ms-lg-2"><a href="src/brochure_Constructora_Emmanuel.pdf" class="btn btn-brand" target="_blank">Brochure</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="container">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb mb-2">
+        <li class="breadcrumb-item"><a href="index.html" style="color:rgba(255,255,255,.6)">Inicio</a></li>
+        <li class="breadcrumb-item active" style="color:#fff">Proyectos</li>
+      </ol>
+    </nav>
+    <p class="section-eyebrow" style="color:var(--brand)">Portafolio</p>
+    <h1 style="color:#fff">Todos Nuestros Proyectos</h1>
+    <p style="color:rgba(255,255,255,.72);max-width:520px">Conoce el alcance y calidad de nuestras obras ejecutadas en Lima y el resto del Perú.</p>
+  </div>
+</div>
+
+<!-- PROJECTS GRID -->
+<section style="padding:3rem 0 5rem">
+  <div class="container">
+    <div class="d-flex flex-wrap gap-2 mb-4 filter-btns">
+      <button class="filter-btn active" data-filter="all">Todos</button>
+      <button class="filter-btn" data-filter="obras-civiles">Obras Civiles</button>
+      <button class="filter-btn" data-filter="demoliciones">Demoliciones</button>
+      <button class="filter-btn" data-filter="pavimentacion">Pavimentación</button>
+      <button class="filter-btn" data-filter="acabados">Acabados</button>
+    </div>
+    <div id="all-projects-grid" class="proj-grid-wrap"></div>
+  </div>
+</section>
+
+<!-- MODAL PROYECTO -->
+<div id="projectModal" style="display:none;position:fixed;inset:0;z-index:3000;align-items:center;justify-content:center;">
+  <div class="pm-backdrop"></div>
+  <div class="pm-box">
+    <div class="pm-header">
+      <div class="pm-meta-tag"><span id="pm-tag"></span> · <span id="pm-area"></span></div>
+      <h2 id="pm-title"></h2>
+      <button id="pm-close">&#x2715;</button>
+    </div>
+    <div class="pm-body">
+      <div class="pm-img-col"><div id="pm-img"></div></div>
+      <div class="pm-info-col">
+        <p class="pm-desc" id="pm-desc"></p>
+        <div class="pm-grid">
+          <div class="pm-field"><label>Cliente</label><span id="pm-client"></span></div>
+          <div class="pm-field"><label>Ubicación</label><span id="pm-loc"></span></div>
+          <div class="pm-field"><label>Año</label><span id="pm-year"></span></div>
+          <div class="pm-field"><label>Área</label><span id="pm-areav"></span></div>
+          <div class="pm-field"><label>Duración</label><span id="pm-duration"></span></div>
+        </div>
+        <a href="index.html#contact" class="pm-btn">Ver proyecto similar</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<a href="https://wa.me/51919441396" target="_blank" class="whatsapp-float"><i class="bx bxl-whatsapp"></i></a>
+
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.bundle.min.js"></script>
+<script src="js/owl.carousel.min.js"></script>
+<script src="js/app.js"></script>
+<script>
+  // En proyectos.html usar el grid completo sin masonry
+  $(document).ready(function(){
+    renderProjects('all','all-projects-grid', false);
+
+    // Filtros apuntan al grid correcto
+    $('.filter-btn').off('click').on('click', function(){
+      $('.filter-btn').removeClass('active');
+      $(this).addClass('active');
+      renderProjects($(this).data('filter'),'all-projects-grid', false);
+    });
+
+    // Modal
+    $('#projectModal').css('display','none');
+    $('#pm-close, #projectModal .pm-backdrop').on('click', function(){
+      $('#projectModal').fadeOut(180); $('body').css('overflow','');
+    });
+    window.openProjectModal = function(id){
+      var p = window.projects.find(function(x){return x.id===id;});
+      if(!p) return;
+      $('#pm-tag').text(p.tag); $('#pm-area').text(p.area); $('#pm-title').text(p.title);
+      $('#pm-desc').text(p.desc); $('#pm-img').css('background-image','url('+p.img+')');
+      $('#pm-client').text(p.client); $('#pm-loc').text(p.loc); $('#pm-year').text(p.year);
+      $('#pm-areav').text(p.area); $('#pm-duration').text(p.duration);
+      $('#projectModal').css('display','flex'); $('body').css('overflow','hidden');
+    };
+    $(window).on('scroll',function(){ $('.navbar').toggleClass('scrolled',$(this).scrollTop()>60); });
+  });
+</script>
+</body>
+</html>

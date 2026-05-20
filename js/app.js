@@ -1,52 +1,145 @@
 $(document).ready(function () {
-  //Owl
+
+  /* ── HERO SLIDER ── */
   $(".hero-slider").owlCarousel({
-    loop: true,
-    margin: 0,
-    items: 1,
-    dots: false,
-    navText: ["<", ">"],
-    smartSpeed: 1000,
-    autoplay: true,
-    autoplayTimeout: 7000,
-    responsive: {
-      0: {
-        nav: false,
-      },
-      768: {
-        nav: true,
-      },
-    },
+    loop: true, nav: true, dots: true,
+    smartSpeed: 700, items: 1,
+    autoplay: true, autoplayTimeout: 3000,
+    autoplayHoverPause: true,
+    navText: ["&#8592;", "&#8594;"],
+    animateOut: "fadeOut",
   });
 
-  $("#projects-slider").owlCarousel({
-    loop: true,
-    nav: false,
-    items: 2,
-    dots: true,
-    smartSpeed: 600,
-    center: true,
-    autoplay: true,
-    autoplayTimeout: 4000,
-    responsive: {
-      0: {
-        items: 1,
-      },
-      768: {
-        items: 2,
-        margin: 8,
-      },
-    },
-  });
 
+  /* ── REVIEWS SLIDER ── */
   $(".reviews-slider").owlCarousel({
-    loop: true,
-    nav: false,
-    dots: true,
-    smartSpeed: 900,
-    items: 1,
-    margin: 24,
-    autoplay: true,
-    autoplayTimeout: 4000,
+    loop: true, nav: false, dots: true,
+    smartSpeed: 900, items: 1, margin: 24,
+    autoplay: true, autoplayTimeout: 5000,
   });
+
+  /* ── CLIENTS LOGO CAROUSEL ── */
+  if ($(".clients-slider").length) {
+    $(".clients-slider").owlCarousel({
+      loop: true, nav: false, dots: false,
+      smartSpeed: 800, autoplay: true,
+      autoplayTimeout: 2000, autoplaySpeed: 2000,
+      responsive: { 0:{items:2}, 480:{items:3}, 768:{items:4}, 1024:{items:5} },
+    });
+  }
+
+  /* ── SCROLL ANIMATIONS ── */
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(el => {
+      if (el.isIntersecting) { el.target.classList.add('visible'); observer.unobserve(el.target); }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-up,.fade-left,.fade-right,.scale-in,.stagger-item').forEach(el => observer.observe(el));
+
+  /* ── COUNTER ── */
+  function animateCounter(el) {
+    const target = parseInt(el.dataset.target);
+    const suffix = el.dataset.suffix || '';
+    let current = 0;
+    const step = target / 80;
+    const timer = setInterval(() => {
+      current += step;
+      if (current >= target) { current = target; clearInterval(timer); }
+      el.textContent = Math.floor(current).toLocaleString() + suffix;
+    }, 18);
+  }
+  const milestoneObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.querySelectorAll('[data-target]').forEach(animateCounter);
+        milestoneObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.3 });
+  const milestone = document.getElementById('milestone');
+  if (milestone) milestoneObserver.observe(milestone);
+
+  /* ── HERO VIDEO ── */
+  let videoIdx = 0;
+  const videos = document.querySelectorAll('.hero-video-item');
+  const slides = document.querySelectorAll('.hero-slide-content');
+  const dots   = document.querySelectorAll('.hero-dot');
+  function goSlide(n) {
+    videos.forEach((v,i) => { v.classList.toggle('active', i===n); if(i===n){v.play();} else{v.pause();} });
+    slides.forEach((s,i) => s.classList.toggle('active', i===n));
+    dots.forEach((d,i) => d.classList.toggle('active', i===n));
+    videoIdx = n;
+  }
+  if (videos.length) {
+    goSlide(0);
+    videos.forEach((v,i) => v.addEventListener('ended', () => goSlide((i+1) % videos.length)));
+    document.querySelectorAll('.hero-dot').forEach((d,i) => d.addEventListener('click', () => goSlide(i)));
+    document.querySelector('.hero-prev') && document.querySelector('.hero-prev').addEventListener('click', () => goSlide((videoIdx - 1 + videos.length) % videos.length));
+    document.querySelector('.hero-next') && document.querySelector('.hero-next').addEventListener('click', () => goSlide((videoIdx + 1) % videos.length));
+  }
+
+  /* ── PROJECTS DATA ── */
+  window.projects = [
+    { id:1, cat:'obras-civiles',  title:'Centro Logístico Lurín',        tag:'Obras Civiles', area:'12,500 m²', loc:'Lurín, Lima',      img:'img/centrologistico.jpg', client:'Ransa',            year:'2024', duration:'8 meses',  desc:'Construcción integral de nave logística con losa industrial de alta resistencia, sistemas contraincendios y oficinas administrativas. Ejecución con tolerancias milimétricas y entrega anticipada.' },
+    { id:2, cat:'demoliciones',   title:'Demolición Edificio San Isidro', tag:'Demoliciones',  area:'8,000 m²',  loc:'San Isidro, Lima', img:'img/demolicion.jpg', client:'Pacífico Seguros', year:'2024', duration:'4 meses',  desc:'Demolición controlada de edificio de 8 pisos en zona urbana de alta densidad. Gestión de residuos certificada y cero incidentes de seguridad durante toda la ejecución.' },
+    { id:3, cat:'pavimentacion',  title:'Pavimentación Av. Industrial',   tag:'Pavimentación', area:'3.2 km',    loc:'Lima Norte',       img:'img/pavimentacion.jpg', client:'Municipalidad',    year:'2023', duration:'6 meses',  desc:'Pavimentación de avenida industrial de 3.2 km con asfalto de alta resistencia, señalización horizontal y drenaje pluvial. Obra ejecutada sin corte de tráfico.' },
+    { id:4, cat:'acabados',       title:'Residencial Los Olivos',         tag:'Acabados',      area:'120 dptos', loc:'Los Olivos',       img:'img/residencial.jpg', client:'Grupo Inmobil',    year:'2023', duration:'10 meses', desc:'Acabados arquitectónicos completos para 120 departamentos: pisos, pintura, carpintería metálica y vidriería. Entrega a tiempo con índice de satisfacción del 98%.' },
+    { id:5, cat:'obras-civiles',  title:'Planta Industrial Callao',       tag:'Obras Civiles', area:'15,000 m²', loc:'Callao',           img:'img/planta.jpg', client:'Gloria S.A.',      year:'2023', duration:'12 meses', desc:'Construcción de planta industrial con cimentaciones especiales, estructura metálica, losa de alta resistencia y sistemas MEP completos.' },
+  ];
+
+  /* ── OPEN PROJECT MODAL ── */
+  window.openProjectModal = function(id) {
+    const p = window.projects.find(x => x.id === id);
+    if (!p) return;
+    $('#pm-tag').text(p.tag);
+    $('#pm-area').text(p.area);
+    $('#pm-title').text(p.title);
+    $('#pm-desc').text(p.desc);
+    $('#pm-img').css('background-image', 'url('+p.img+')');
+    $('#pm-client').text(p.client);
+    $('#pm-loc').text(p.loc);
+    $('#pm-year').text(p.year);
+    $('#pm-areav').text(p.area);
+    $('#pm-duration').text(p.duration);
+    $('#projectModal').css({'display':'flex','opacity':0}).animate({'opacity':1},200);
+    $('body').css('overflow','hidden');
+  };
+
+  /* ── RENDER PROJECT GRID ── */
+  window.renderProjects = function(filter, containerId, masonry) {
+    const grid = $('#' + containerId);
+    grid.html('');
+    const filtered = filter === 'all' ? window.projects : window.projects.filter(p => p.cat === filter);
+    filtered.forEach((p, i) => {
+      const card = $('<div class="proj-card fade-up" data-id="'+p.id+'" style="transition-delay:'+(i*70)+'ms"><div class="proj-img" style="background-image:url('+p.img+')"></div><div class="proj-overlay"><span class="proj-tag">'+p.tag+'</span><h3>'+p.title+'</h3><p><span>'+p.area+'</span><span class="dot"> • </span><span>'+p.loc+'</span></p></div></div>');
+      if (masonry && i === 0) card.addClass('proj-first');
+      grid.append(card);
+      setTimeout(() => card.addClass('visible'), i * 70 + 50);
+    });
+    grid.find('.proj-card').on('click', function() { window.openProjectModal($(this).data('id')); });
+  };
+
+  renderProjects('all', 'portfolio-grid', true);
+
+  $(document).on('click', '.filter-btn', function() {
+    $(this).closest('.filter-btns').find('.filter-btn').removeClass('active');
+    $(this).addClass('active');
+    const filter = $(this).data('filter');
+    const grid = $(this).closest('section,main').find('.proj-grid-wrap').attr('id') || 'portfolio-grid';
+    renderProjects(filter, grid, grid === 'portfolio-grid');
+  });
+
+  /* ── CLOSE PROJECT MODAL ── */
+  $('#pm-close, #projectModal .pm-backdrop').on('click', function() {
+    $('#projectModal').fadeOut(180);
+    $('body').css('overflow','');
+  });
+  $(document).on('keydown', function(e) { if (e.key === 'Escape') { $('#projectModal').fadeOut(180); $('body').css('overflow',''); } });
+
+  /* ── NAVBAR SCROLL ── */
+  $(window).on('scroll', function() { $('.navbar').toggleClass('scrolled', $(this).scrollTop() > 60); });
+
+  /* ── CLOSE MOBILE NAV ON LINK ── */
+  $('.navbar-nav .nav-link').on('click', function() { $('.navbar-collapse').collapse('hide'); });
+
 });
