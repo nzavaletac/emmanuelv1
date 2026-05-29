@@ -104,7 +104,7 @@ section {
 
 .slide1 {
   background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
-    url(../img/banner1.jpg);
+    url(../img/banner2.webp);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -112,7 +112,7 @@ section {
 
 .slide2 {
   background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
-    url(../img/banner2.webp);
+    url(../img/banner4.jpg);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -126,7 +126,7 @@ section {
 }
 .slide4 {
   background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
-    url(../img/banner4.jpg);
+    url(../img/banner1.jpg);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -767,11 +767,11 @@ input.form-control {
   position: relative;
 }
 .slide1 {
-  background: linear-gradient(rgba(0,0,0,.4),rgba(0,0,0,.4)), url(../img/banner1.jpg);
+  background: linear-gradient(rgba(0,0,0,.4),rgba(0,0,0,.4)), url(../img/banner2.webp);
   background-size: cover; background-position: center;
 }
 .slide2 {
-  background: linear-gradient(rgba(0,0,0,.4),rgba(0,0,0,.4)), url(../img/banner2.webp);
+  background: linear-gradient(rgba(0,0,0,.4),rgba(0,0,0,.4)), url(../img/banner4.jpg);
   background-size: cover; background-position: center;
 }
 .slide3 {
@@ -779,7 +779,7 @@ input.form-control {
   background-size: cover; background-position: center;
 }
 .slide4 {
-  background: linear-gradient(rgba(0,0,0,.4),rgba(0,0,0,.4)), url(../img/banner4.jpg);
+  background: linear-gradient(rgba(0,0,0,.4),rgba(0,0,0,.4)), url(../img/banner1.jpg);
   background-size: cover; background-position: center;
 }
 .slide .display-3 { text-transform: uppercase; color: #fff; }
